@@ -1,0 +1,25 @@
+<aura:component implements="flexipage:availableForRecordHome,force:hasRecordId">
+  <aura:attribute name="recordData" type="Object"> </aura:attribute>
+  <force:recordData
+    recordId="{!v.recordId}"
+    aura:id="recordDataId"
+    targetFields="{!v.recordData}"
+    fields="Owner.SmallPhotoUrl, OwnerId, Owner.Name"
+  >
+  </force:recordData>
+  <lightning:card title="Record Owner Details">
+    <aura:if
+      isTrue="{!((not(empty(v.recordData))) ? (not(empty(v.recordData.OwnerId))) : false)}"
+    >
+      <lightning:layout multipleRows="true">
+        <lightning:layoutItem size="12" padding="around-small">
+          <Strong>Owner Name: </Strong> {!v.recordData.Owner.Name}
+        </lightning:layoutItem>
+        <lightning:layoutItem size="12" padding="around-small">
+          <Strong>Owner Image: </Strong>
+          <img src="{!v.recordData.Owner.SmallPhotoUrl}"> </img>
+        </lightning:layoutItem>
+      </lightning:layout>
+    </aura:if>
+  </lightning:card>
+</aura:component>
